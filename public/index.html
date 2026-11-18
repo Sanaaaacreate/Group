@@ -7,73 +7,79 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
-        body { background-color: #0b141a; color: #e9edef; height: 100vh; display: flex; justify-content: center; align-items: center; overflow: hidden; }
+        body { background-color: #efeae2; color: #111b21; height: 100vh; display: flex; justify-content: center; align-items: center; overflow: hidden; }
         
-        /* Login Screen */
-        #login-screen { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #111b21; display: flex; justify-content: center; align-items: center; z-index: 1000; }
-        .login-box { background: #202c33; padding: 40px; border-radius: 12px; text-align: center; width: 350px; box-shadow: 0 4px 20px rgba(0,0,0,0.5); }
+        /* Light Login Screen */
+        #login-screen { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #f0f2f5; display: flex; justify-content: center; align-items: center; z-index: 1000; }
+        .login-box { background: #ffffff; padding: 40px; border-radius: 12px; text-align: center; width: 350px; box-shadow: 0 4px 20px rgba(0,0,0,0.1); border: 1px solid #d1d7db; }
         .login-box h2 { color: #00a884; margin-bottom: 20px; }
-        .login-box input { width: 100%; padding: 12px; margin-bottom: 20px; background: #2a3942; border: none; border-radius: 6px; color: #fff; font-size: 16px; outline: none; }
+        .login-box input { width: 100%; padding: 12px; margin-bottom: 20px; background: #f0f2f5; border: 1px solid #d1d7db; border-radius: 6px; color: #111b21; font-size: 16px; outline: none; }
         .login-box button { width: 100%; padding: 12px; background: #00a884; border: none; border-radius: 6px; color: #fff; font-size: 16px; font-weight: bold; cursor: pointer; transition: 0.2s; }
         .login-box button:hover { background: #029374; }
 
         /* Chat Container */
-        .chat-container { width: 100%; max-width: 900px; height: 100%; background: #0b141a; display: flex; flex-direction: column; position: relative; }
-        @media(min-width: 768px) { .chat-container { height: 92vh; border-radius: 10px; box-shadow: 0 10px 30px rgba(0,0,0,0.6); } }
+        .chat-container { width: 100%; max-width: 900px; height: 100%; background: #efeae2; display: flex; flex-direction: column; position: relative; }
+        @media(min-width: 768px) { .chat-container { height: 92vh; border-radius: 10px; box-shadow: 0 10px 30px rgba(0,0,0,0.15); border: 1px solid #d1d7db; } }
 
-        /* Header */
-        .chat-header { background: #202c33; padding: 10px 15px; display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid #222d34; }
+        /* Light Header */
+        .chat-header { background: #f0f2f5; padding: 10px 15px; display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid #d1d7db; }
         .header-left { display: flex; align-items: center; gap: 12px; }
         .group-avatar { width: 40px; height: 40px; background: #00a884; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 20px; color: #fff; }
-        .group-info h3 { font-size: 16px; font-weight: 600; color: #e9edef; }
-        .group-info p { font-size: 12px; color: #8696a0; }
+        .group-info h3 { font-size: 16px; font-weight: 600; color: #111b21; }
+        .group-info p { font-size: 12px; color: #667781; }
         .header-right { position: relative; }
-        .menu-btn { background: none; border: none; color: #aebac1; font-size: 20px; cursor: pointer; padding: 8px; border-radius: 50%; }
-        .menu-btn:hover { background: #374248; }
+        .menu-btn { background: none; border: none; color: #54656f; font-size: 20px; cursor: pointer; padding: 8px; border-radius: 50%; }
+        .menu-btn:hover { background: rgba(0,0,0,0.05); }
 
         /* Dropdown Menu */
-        .dropdown-menu { display: none; position: absolute; right: 0; top: 45px; background: #233138; border-radius: 4px; box-shadow: 0 4px 12px rgba(0,0,0,0.4); width: 210px; z-index: 100; }
+        .dropdown-menu { display: none; position: absolute; right: 0; top: 45px; background: #ffffff; border-radius: 4px; box-shadow: 0 4px 12px rgba(0,0,0,0.15); width: 210px; z-index: 100; border: 1px solid #d1d7db; }
         .dropdown-menu.active { display: block; }
-        .dropdown-item { padding: 12px 16px; font-size: 14px; color: #e9edef; cursor: pointer; display: flex; align-items: center; gap: 10px; border-bottom: 1px solid #2a3942; }
-        .dropdown-item:hover { background: #182229; }
+        .dropdown-item { padding: 12px 16px; font-size: 14px; color: #111b21; cursor: pointer; display: flex; align-items: center; gap: 10px; border-bottom: 1px solid #f0f2f5; }
+        .dropdown-item:hover { background: #f5f6f6; }
 
-        /* Messages Area */
-        .chat-messages { flex: 1; background: #0b141a url('https://user-images.githubusercontent.com/15075759/28719144-86dc0f70-73b1-11e7-911d-60d70fcded21.png') repeat; padding: 15px; overflow-y: auto; display: flex; flex-direction: column; gap: 8px; }
-        .message { max-width: 70%; padding: 8px 12px; border-radius: 7.5px; position: relative; word-wrap: break-word; font-size: 14.5px; box-shadow: 0 1px 0.5px rgba(0,0,0,0.13); }
-        .message.incoming { background: #202c33; align-self: flex-start; border-top-left-radius: 0; }
-        .message.outgoing { background: #005c4b; align-self: flex-end; border-top-right-radius: 0; }
-        .sender-name { font-size: 12px; font-weight: bold; color: #53bdeb; margin-bottom: 2px; }
-        .message-time { font-size: 10px; color: #8696a0; float: right; margin-left: 10px; margin-top: 4px; }
+        /* Messages Area (Light WhatsApp Wallpaper) */
+        .chat-messages { flex: 1; background: #efeae2 url('https://user-images.githubusercontent.com/15075759/28719144-86dc0f70-73b1-11e7-911d-60d70fcded21.png') repeat; padding: 15px; overflow-y: auto; display: flex; flex-direction: column; gap: 8px; }
+        .message { max-width: 75%; padding: 8px 12px; border-radius: 7.5px; position: relative; word-wrap: break-word; font-size: 14.5px; box-shadow: 0 1px 0.5px rgba(0,0,0,0.13); }
+        .message.incoming { background: #ffffff; align-self: flex-start; border-top-left-radius: 0; color: #111b21; }
+        .message.outgoing { background: #d9fdd3; align-self: flex-end; border-top-right-radius: 0; color: #111b21; }
+        .sender-name { font-size: 12px; font-weight: bold; color: #008069; margin-bottom: 2px; }
+        .message-time { font-size: 10px; color: #667781; float: right; margin-left: 10px; margin-top: 4px; }
         
-        /* Media in Chat */
-        .msg-img, .msg-video { width: 100%; max-height: 250px; border-radius: 6px; cursor: pointer; object-fit: cover; margin-top: 4px; }
-        .file-box { display: flex; align-items: center; gap: 10px; background: rgba(0,0,0,0.2); padding: 8px; border-radius: 6px; margin-top: 4px; }
-        .file-box i { font-size: 24px; color: #00a884; }
-        .download-btn { background: #00a884; color: #fff; border: none; padding: 4px 8px; border-radius: 4px; font-size: 12px; cursor: pointer; text-decoration: none; }
+        /* Media & Heavy Files Styling */
+        .msg-img, .msg-video { width: 100%; max-height: 280px; border-radius: 6px; cursor: pointer; object-fit: cover; margin-top: 4px; }
+        .msg-audio { width: 240px; margin-top: 4px; }
+        .file-box { display: flex; align-items: center; gap: 10px; background: rgba(0,0,0,0.05); padding: 10px; border-radius: 6px; margin-top: 4px; border: 1px solid rgba(0,0,0,0.1); }
+        .file-box i { font-size: 26px; color: #00a884; }
+        .download-btn { background: #00a884; color: #fff; border: none; padding: 6px 12px; border-radius: 4px; font-size: 13px; cursor: pointer; text-decoration: none; font-weight: bold; }
+        .download-btn:hover { background: #029374; }
+
+        /* Upload Progress Loader */
+        #upload-loader { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(255,255,255,0.8); z-index: 500; justify-content: center; align-items: center; flex-direction: column; font-weight: bold; color: #00a884; font-size: 18px; }
 
         /* Input Area */
-        .chat-input-area { background: #202c33; padding: 10px 15px; display: flex; align-items: center; gap: 10px; }
-        .chat-input-area input[type="text"] { flex: 1; background: #2a3942; border: none; border-radius: 8px; padding: 10px 15px; color: #fff; font-size: 15px; outline: none; }
-        .icon-action-btn { background: none; border: none; color: #8696a0; font-size: 20px; cursor: pointer; }
-        .icon-action-btn:hover { color: #e9edef; }
+        .chat-input-area { background: #f0f2f5; padding: 10px 15px; display: flex; align-items: center; gap: 10px; border-top: 1px solid #d1d7db; }
+        .chat-input-area input[type="text"] { flex: 1; background: #ffffff; border: 1px solid #d1d7db; border-radius: 8px; padding: 10px 15px; color: #111b21; font-size: 15px; outline: none; }
+        .icon-action-btn { background: none; border: none; color: #54656f; font-size: 20px; cursor: pointer; }
+        .icon-action-btn:hover { color: #111b21; }
         .send-btn { background: #00a884; border: none; color: #fff; width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; font-size: 16px; }
+        .send-btn:hover { background: #029374; }
 
-        /* Modal / Popups */
-        .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); justify-content: center; align-items: center; z-index: 200; }
-        .modal-content { background: #222d34; padding: 25px; border-radius: 10px; width: 320px; text-align: center; }
-        .modal-content h3 { margin-bottom: 15px; color: #e9edef; }
-        .modal-content input { width: 100%; padding: 10px; background: #2a3942; border: none; border-radius: 6px; color: #fff; margin-bottom: 15px; outline: none; }
+        /* Modals */
+        .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); justify-content: center; align-items: center; z-index: 200; }
+        .modal-content { background: #ffffff; padding: 25px; border-radius: 10px; width: 320px; text-align: center; border: 1px solid #d1d7db; box-shadow: 0 4px 20px rgba(0,0,0,0.2); }
+        .modal-content h3 { margin-bottom: 15px; color: #111b21; }
+        .modal-content input { width: 100%; padding: 10px; background: #f0f2f5; border: 1px solid #d1d7db; border-radius: 6px; color: #111b21; margin-bottom: 15px; outline: none; }
         .modal-buttons { display: flex; justify-content: flex-end; gap: 10px; }
         .modal-buttons button { padding: 8px 16px; border: none; border-radius: 4px; cursor: pointer; font-weight: bold; }
-        .btn-cancel { background: #374248; color: #fff; }
+        .btn-cancel { background: #e9edef; color: #3b4a54; }
         .btn-ok { background: #00a884; color: #fff; }
 
-        /* Members List Modal */
-        .members-list { max-height: 200px; overflow-y: auto; text-align: left; margin-bottom: 15px; background: #111b21; padding: 10px; border-radius: 6px; }
-        .member-item { padding: 6px 0; border-bottom: 1px solid #222d34; font-size: 14px; display: flex; align-items: center; gap: 8px; }
+        /* Members List */
+        .members-list { max-height: 200px; overflow-y: auto; text-align: left; margin-bottom: 15px; background: #f0f2f5; padding: 10px; border-radius: 6px; border: 1px solid #d1d7db; }
+        .member-item { padding: 6px 0; border-bottom: 1px solid #e9edef; font-size: 14px; display: flex; align-items: center; gap: 8px; color: #111b21; }
         .member-item i { color: #00a884; font-size: 10px; }
 
-        /* Full Image Modal */
+        /* Full Media View Modal */
         #media-modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); justify-content: center; align-items: center; z-index: 300; }
         #media-modal img { max-width: 90%; max-height: 90%; border-radius: 8px; }
         .close-media { position: absolute; top: 20px; right: 30px; color: #fff; font-size: 30px; cursor: pointer; }
@@ -81,17 +87,23 @@
 </head>
 <body>
 
-    <!-- Login Screen -->
+    <!-- Upload Progress Loader -->
+    <div id="upload-loader">
+        <i class="fa-solid fa-spinner fa-spin" style="font-size: 40px; margin-bottom: 10px;"></i>
+        <span>बड़ी फाइल लोड हो रही है, कृपया प्रतीक्षा करें...</span>
+    </div>
+
+    <!-- Login Screen (Light Theme) -->
     <div id="login-screen">
         <div class="login-box">
             <h2>🌸 Hello Dosto 🌸</h2>
-            <p style="color: #8696a0; font-size: 14px; margin-bottom: 20px;">चैट में शामिल होने के लिए अपना नाम दर्ज करें</p>
+            <p style="color: #667781; font-size: 14px; margin-bottom: 20px;">चैट में शामिल होने के लिए अपना नाम दर्ज करें</p>
             <input type="text" id="username-input" placeholder="अपना नाम लिखें..." autocomplete="off">
             <button onclick="joinChat()">चैट में जाएं</button>
         </div>
     </div>
 
-    <!-- Main Chat Interface -->
+    <!-- Main Chat Interface (Light Theme) -->
     <div class="chat-container" id="chat-container" style="display: none;">
         <!-- Header -->
         <div class="chat-header">
@@ -118,7 +130,7 @@
 
         <!-- Input Area -->
         <div class="chat-input-area">
-            <label for="media-file-input" class="icon-action-btn"><i class="fa-solid fa-paperclip"></i></label>
+            <label for="media-file-input" class="icon-action-btn" title="फोटो, वीडियो या डॉक्यूमेंट भेजें (200MB तक)"><i class="fa-solid fa-paperclip"></i></label>
             <input type="file" id="media-file-input" style="display: none;" onchange="sendFile(event)">
             <input type="text" id="message-input" placeholder="संदेश टाइप करें..." onkeypress="handleKeyPress(event)">
             <button class="send-btn" onclick="sendMessage()"><i class="fa-solid fa-paper-plane"></i></button>
@@ -158,8 +170,17 @@
     <script src="/socket.io/socket.io.js"></script>
     <script>
         const socket = io();
-        let myName = "";
-        let onlineUsersList = [];
+        let myName = localStorage.getItem('chat_username') || "";
+
+        // Auto Login if name already exists in LocalStorage
+        window.onload = function() {
+            if (myName) {
+                document.getElementById('login-screen').style.display = 'none';
+                document.getElementById('chat-container').style.display = 'flex';
+                socket.emit('join-chat', myName);
+                loadLocalChat();
+            }
+        };
 
         function joinChat() {
             const input = document.getElementById('username-input').value.trim();
@@ -168,6 +189,7 @@
                 return;
             }
             myName = input;
+            localStorage.setItem('chat_username', myName);
             document.getElementById('login-screen').style.display = 'none';
             document.getElementById('chat-container').style.display = 'flex';
             socket.emit('join-chat', myName);
@@ -201,15 +223,25 @@
             input.value = '';
         }
 
+        // Support for up to 200MB Video, Audio, Images & Documents
         function sendFile(event) {
             const file = event.target.files[0];
             if (!file) return;
+
+            // 200MB limit check
+            if (file.size > 200 * 1024 * 1024) {
+                alert("फाइल का साइज़ 200MB से ज्यादा है! कृपया छोटी फाइल चुनें।");
+                return;
+            }
+
+            document.getElementById('upload-loader').style.display = 'flex';
 
             const reader = new FileReader();
             reader.onload = function(e) {
                 let fileType = 'file';
                 if (file.type.startsWith('image/')) fileType = 'image';
                 else if (file.type.startsWith('video/')) fileType = 'video';
+                else if (file.type.startsWith('audio/')) fileType = 'audio';
 
                 const msgData = {
                     name: myName,
@@ -219,6 +251,8 @@
                     time: new Date().toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})
                 };
                 socket.emit('chat-message', msgData);
+                document.getElementById('upload-loader').style.display = 'none';
+                event.target.value = ''; // Reset file input
             };
             reader.readAsDataURL(file);
         }
@@ -251,10 +285,12 @@
                 contentHTML += `<img src="${data.content}" class="msg-img" onclick="openMediaModal('${data.content}')">`;
             } else if (data.type === 'video') {
                 contentHTML += `<video src="${data.content}" class="msg-video" controls></video>`;
+            } else if (data.type === 'audio') {
+                contentHTML += `<audio src="${data.content}" class="msg-audio" controls></audio>`;
             } else {
                 contentHTML += `<div class="file-box">
                     <i class="fa-solid fa-file-arrow-down"></i>
-                    <div style="flex:1; font-size:13px; word-break:break-all;">${data.fileName}</div>
+                    <div style="flex:1; font-size:13px; word-break:break-all; color:#111b21;">${data.fileName}</div>
                     <a href="${data.content}" download="${data.fileName}" class="download-btn">डाउनलोड</a>
                 </div>`;
             }
@@ -319,4 +355,4 @@
         }
     </script>
 </body>
-  </html>
+</html>
