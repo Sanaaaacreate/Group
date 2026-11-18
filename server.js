@@ -5,12 +5,14 @@ const path = require('path');
 
 const app = express();
 const server = http.createServer(app);
-const io = new Server(server);
 
-// Public folder को सेट करना ताकि index.html लोड हो सके
+// 250MB Buffer size set kiya hai taaki 200MB+ ki video/audio/files aasani se send ho sakein
+const io = new Server(server, {
+    maxHttpBufferSize: 250 * 1024 * 1024 
+});
+
 app.use(express.static(path.join(__dirname, 'public')));
 
-// Store group name and online users in memory
 let groupName = "🌸Hello Dosto😊🙂";
 let connectedUsers = {};
 
